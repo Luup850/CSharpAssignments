@@ -10,7 +10,11 @@ namespace Aflevering3
     {
         static void Main(string[] args)
         {
-
+            Menu test = new Menu("Test");
+            test.AddMenuItem("Click", "Content");
+            test.AddMenuItem("Click2", "Content");
+            test.AddMenuItem("Click3", "Content");
+            test.Start();
         }
     }
 }
