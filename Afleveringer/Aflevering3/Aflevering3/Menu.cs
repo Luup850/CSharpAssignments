@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 namespace Aflevering3
 {
+    /// <summary>
+    /// Console menu.
+    /// </summary>
     class Menu
     {
         string MenuTitle { get; }
         int TargetItemID = 0;
         bool IsRunning = true;
-        //Ved godt du sagde array men jeg følte at en list var mere praktisk selvom vi ikke har lært om den endnu :)
+        //Ved godt du sagde array men jeg følte at en list var mere praktisk :)
         LinkedList<MenuItem> MenuItemList = new LinkedList<MenuItem>();
 
         public Menu(string title)
@@ -24,9 +27,9 @@ namespace Aflevering3
             MenuItemList.AddLast(new MenuItem(title, content));
         }
 
-        public void AddMenuItem(string title, Menu content)
+        public void AddMenuItem(string title, Menu menu)
         {
-            
+            MenuItemList.AddLast(new MenuItem(title, menu));
         }
 
         public void Start()
@@ -38,12 +41,10 @@ namespace Aflevering3
             } while (IsRunning);
         }
 
-        /// <summary>
-        /// Draw console menu
-        /// </summary>
         private void DrawMenu()
         {
-            for(int i = 0; i < MenuItemList.Count; i++)
+            Console.Clear();
+            for (int i = 0; i < MenuItemList.Count; i++)
             {
                 if (i == TargetItemID)
                     Console.BackgroundColor = ConsoleColor.DarkGreen;
@@ -80,15 +81,17 @@ namespace Aflevering3
                 default:
                     break;
             }
-            //System.Threading.Thread.Sleep(200);
-            Console.Clear();
         }
     }
 
+    /// <summary>
+    /// Menu item. Can contain strings and another menu.
+    /// </summary>
     class MenuItem
     {
         public string MenuItemTitle;
         public string MenuItemContent;
+        Menu SubMenu;
 
         public MenuItem(string title, string content)
         {
@@ -96,9 +99,25 @@ namespace Aflevering3
             MenuItemContent = content;
         }
 
+        public MenuItem(string title, Menu menu)
+        {
+            MenuItemTitle = title;
+            SubMenu = menu;
+        }
+
         public void Select()
         {
-
+            if (SubMenu != null)
+            {
+                SubMenu.Start();
+            }
+            else if (MenuItemContent != null)
+            {
+                Console.Clear();
+                Console.WriteLine(MenuItemContent);
+                Console.ReadKey();
+                Console.Clear();
+            }
         }
     }
 }
