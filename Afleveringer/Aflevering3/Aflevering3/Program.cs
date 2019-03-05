@@ -14,6 +14,7 @@ namespace Aflevering3
             test.AddMenuItem("Click", "Content");
             test.AddMenuItem("Click2", "Content");
             test.AddMenuItem("Click3", "Content");
+            
             test.Start();
         }
     }

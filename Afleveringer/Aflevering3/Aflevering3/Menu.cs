@@ -24,6 +24,11 @@ namespace Aflevering3
             MenuItemList.AddLast(new MenuItem(title, content));
         }
 
+        public void AddMenuItem(string title, Menu content)
+        {
+            
+        }
+
         public void Start()
         {
             do
@@ -41,11 +46,10 @@ namespace Aflevering3
             for(int i = 0; i < MenuItemList.Count; i++)
             {
                 if (i == TargetItemID)
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                else
-                    Console.ResetColor();
+                    Console.BackgroundColor = ConsoleColor.DarkGreen;
 
                 Console.WriteLine(MenuItemList.ElementAt(i).MenuItemTitle);
+                Console.ResetColor();
             }
         }
         private void HandleInput()
